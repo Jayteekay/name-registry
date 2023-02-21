@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import useWeb3Setup from "./hooks/useWeb3Setup";
+import RegistrationForm from "./components/RegistrationForm";
+import { ChangeEvent } from "react";
+import Table from "./components/Table";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { accounts, currentBlock, nameFee, account, setAccount } =
+    useWeb3Setup();
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <main>
+      <h2>Name Registration</h2>
+      {accounts && (
+        <>
+          <label htmlFor="select-account">Select Account:</label>
+          <select
+            value={account || ""}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setAccount(e.target.value)
+            }
+          >
+            {accounts.map((account) => (
+              <option key={account.toString()}>{account.toString()}</option>
+            ))}
+          </select>
+        </>
+      )}
+      {account ? (
+        <div className="container">
+          <div className="user_names">
+            <h4>Register a new name</h4>
+            <RegistrationForm />
+          </div>
+          <div className="contract_data">
+            <h4>Fee Per Block: {!!nameFee && `${nameFee} wei`} </h4>
+            <h4>Current Block: {currentBlock}</h4>
+            <Table />
+          </div>
+        </div>
+      ) : (
+        <p>Select an account to continue</p>
+      )}
+    </main>
+  );
 }
-
-export default App
