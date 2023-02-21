@@ -44,7 +44,7 @@ contract NameRegistry{
         registry[name] = NameProperties(msg.sender, expiresAt);        
     }
 
-    function cancel(bytes32 name) public payable{
+    function cancel(bytes32 name) public{
         require(block.number < registry[name].expiresAt, "Name is not registered");
         require(msg.sender == registry[name].owner, "Only the name owner can cancel it");
 
