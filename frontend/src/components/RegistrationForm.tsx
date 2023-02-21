@@ -74,7 +74,7 @@ export default function RegistrationForm() {
         onChange={handleChange}
       />
 
-      <button disabled={isLoading}>{isLoading ? "..." : "Proceed"}</button>
+      <button disabled={isLoading}>{isLoading ? "Loading ..." : "Register"}</button>
     </form>
   );
 }

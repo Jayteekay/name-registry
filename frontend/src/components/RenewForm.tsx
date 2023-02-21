@@ -63,7 +63,7 @@ export default function RenewForm({
         min={1}
         onChange={handleChange}
       />
-      <button disabled={isLoading}>{isLoading ? "..." : "Proceed"}</button>
+      <button disabled={isLoading}>{isLoading ? "Loading ..." : "Renew"}</button>
       <button className="button--cancel" onClick={onComplete}>
         Close
       </button>
