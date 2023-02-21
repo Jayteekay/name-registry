@@ -28,7 +28,7 @@ export default function () {
             <td>{expiresAt}</td>
             <td>{status}</td>
             <td>
-              <RowActions name={name} />
+              <RowActions name={name} status={status} />
             </td>
           </tr>
         ))}

@@ -75,5 +75,5 @@ export const cancelRegistration = async ({
   from: string;
 }) => {
   const bytes32Name = web3.utils.asciiToHex(name);
-  return contract.methods.cancel(bytes32Name).send({ from, value: 0 });
+  return contract.methods.cancel(bytes32Name).call({ from, value: 0 });
 };

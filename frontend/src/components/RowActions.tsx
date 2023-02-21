@@ -4,7 +4,7 @@ import RenewForm from "./RenewForm";
 import { cancelRegistration, Name } from "../lib/web3-config";
 import useWeb3Setup from "../hooks/useWeb3Setup";
 
-export default function RowActions({ name }: { name: string }) {
+export default function RowActions({ name, status }: Omit<Name, "expiresAt">) {
   const [showRenewForm, setShowRenewForm] = useState(false);
 
   const { account } = useWeb3Setup();
@@ -23,6 +23,9 @@ export default function RowActions({ name }: { name: string }) {
       queryClient.setQueryData(["names"], context?.previousValues);
     },
   });
+  if (status === "pending") {
+    return null;
+  }
   return (
     <>
       {showRenewForm ? (
