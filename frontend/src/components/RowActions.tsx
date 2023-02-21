@@ -4,7 +4,7 @@ import RenewForm from "./RenewForm";
 import { cancelRegistration, Name } from "../lib/web3-config";
 import useWeb3Setup from "../hooks/useWeb3Setup";
 
-export default function RowActions({ name, status }: Omit<Name, "expiresAt">) {
+export default function RowActions({ name, status }: { name: string, status: string}) {
   const [showRenewForm, setShowRenewForm] = useState(false);
 
   const { account } = useWeb3Setup();
