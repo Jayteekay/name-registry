@@ -62,9 +62,11 @@ export const renewName = async ({
   from: string;
 }) => {
   const bytes32Name = web3.utils.asciiToHex(name);
-  return contract.methods
+  const response = contract.methods
     .renew(bytes32Name, numberOfBlocks)
     .send({ from, value: fee });
+
+  return response;
 };
 
 export const cancelRegistration = async ({
@@ -75,5 +77,5 @@ export const cancelRegistration = async ({
   from: string;
 }) => {
   const bytes32Name = web3.utils.asciiToHex(name);
-  return contract.methods.cancel(bytes32Name).call({ from, value: 0 });
+  return contract.methods.cancel(bytes32Name).send({ from, value: 0 });
 };

@@ -10,9 +10,10 @@ export default function RenewForm({
   onComplete: () => void;
   name: string;
 }) {
+  const [numberOfBlocks, setNumberOfBlocks] = useState<number>(0);
   const { nameFee, account } = useWeb3Setup();
-  const queryClient = useQueryClient();
 
+  const queryClient = useQueryClient();
   const { mutate, error, isLoading } = useMutation(renewName, {
     onMutate: async (newData) => {
       await queryClient.cancelQueries({ queryKey: ["names"] });
@@ -32,17 +33,12 @@ export default function RenewForm({
     },
     onSettled: onComplete,
   });
-  const [numberOfBlocks, setNumberOfBlocks] = useState<number>(0);
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNumberOfBlocks(+e.target.value);
   };
 
   const handleSubmit = (e: FormEvent) => {
-    console.log({
-      name: name,
-      numberOfBlocks: numberOfBlocks,
-      from: account,
-    });
     e.preventDefault();
     if (nameFee && account) {
       mutate({
@@ -55,6 +51,7 @@ export default function RenewForm({
   };
   return (
     <form className="action_buttons" onSubmit={handleSubmit}>
+      <label htmlFor="numberOfBlocks">Number of blocks</label>
       <input
         name="numberOfBlocks"
         type="number"
@@ -63,7 +60,9 @@ export default function RenewForm({
         min={1}
         onChange={handleChange}
       />
-      <button disabled={isLoading}>{isLoading ? "Loading ..." : "Renew"}</button>
+      <button disabled={isLoading}>
+        {isLoading ? "Loading ..." : "Renew"}
+      </button>
       <button className="button--cancel" onClick={onComplete}>
         Close
       </button>

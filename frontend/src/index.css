@@ -93,8 +93,8 @@ tr:hover {
   gap: 1rem;
 }
 
-.user_names {
-  flex: 1;
+.registration_section {
+  flex: 0.5;
 }
 
 .contract_data {

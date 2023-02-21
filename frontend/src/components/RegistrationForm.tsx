@@ -10,7 +10,7 @@ type FormValues = {
 
 export default function RegistrationForm() {
   const { nameFee, account } = useWeb3Setup();
-  
+
   const queryClient = useQueryClient();
   const { mutate, error, isLoading } = useMutation(registerName, {
     onMutate: async (newData) => {
@@ -45,8 +45,8 @@ export default function RegistrationForm() {
         fee: values.numberOfBlocks * nameFee,
         from: account,
       });
+      setValues({ name: "", numberOfBlocks: 0 });
     }
-    setValues({ name: "", numberOfBlocks: 0 });
   };
 
   useEffect(() => {
@@ -74,7 +74,9 @@ export default function RegistrationForm() {
         onChange={handleChange}
       />
 
-      <button disabled={isLoading}>{isLoading ? "Loading ..." : "Register"}</button>
+      <button disabled={isLoading}>
+        {isLoading ? "Loading ..." : "Register"}
+      </button>
     </form>
   );
 }

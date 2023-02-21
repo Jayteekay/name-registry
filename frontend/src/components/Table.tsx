@@ -7,18 +7,23 @@ export default function () {
   const { account } = useWeb3Setup();
   const { isLoading, data } = useQuery({
     queryKey: ["names"],
-    queryFn: () => (account ? fetchNames({ from: account }) : null),
+    queryFn: () => {
+      if (account) return fetchNames({ from: account });
+    },
+    enabled: !!account,
   });
 
   if (isLoading && !data) return <div>Loading...</div>;
   return (
     <table>
       <thead>
-        <th></th>
-        <th>Name</th>
-        <th>Expiry Block</th>
-        <th>Status</th>
-        <th>Actions</th>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Expiry Block</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
       </thead>
       <tbody>
         {data?.map(({ name, expiresAt, status }, index) => (

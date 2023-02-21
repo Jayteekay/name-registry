@@ -29,7 +29,7 @@ export default function Web3ContextProvider({
     queryFn: fetchNameFee,
   });
   const { data: currentBlock } = useQuery({
-    queryKey: ["current_Block"],
+    queryKey: ["current_block"],
     queryFn: getCurrentBlock,
   });
 

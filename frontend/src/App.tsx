@@ -14,6 +14,7 @@ export default function App() {
         <>
           <label htmlFor="select-account">Select Account:</label>
           <select
+            id="select-account"
             value={account || ""}
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
               setAccount(e.target.value)
@@ -27,7 +28,7 @@ export default function App() {
       )}
       {account ? (
         <div className="container">
-          <div className="user_names">
+          <div className="registration_section">
             <h4>Register a new name</h4>
             <RegistrationForm />
           </div>

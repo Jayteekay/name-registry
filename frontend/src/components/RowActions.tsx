@@ -4,7 +4,13 @@ import RenewForm from "./RenewForm";
 import { cancelRegistration, Name } from "../lib/web3-config";
 import useWeb3Setup from "../hooks/useWeb3Setup";
 
-export default function RowActions({ name, status }: { name: string, status: string}) {
+export default function RowActions({
+  name,
+  status,
+}: {
+  name: string;
+  status: string;
+}) {
   const [showRenewForm, setShowRenewForm] = useState(false);
 
   const { account } = useWeb3Setup();
@@ -23,20 +29,29 @@ export default function RowActions({ name, status }: { name: string, status: str
       queryClient.setQueryData(["names"], context?.previousValues);
     },
   });
+
+  const handleHideForm = () => {
+    setShowRenewForm(false);
+  };
+
+  const handleShowForm = () => {
+    setShowRenewForm(true);
+  };
+  const handleCancel = () => {
+    if (account) cancel({ name, from: account });
+  };
+
   if (status === "pending") {
     return null;
   }
   return (
     <>
       {showRenewForm ? (
-        <RenewForm onComplete={() => setShowRenewForm(false)} name={name} />
+        <RenewForm onComplete={handleHideForm} name={name} />
       ) : (
         <div className="action_buttons">
-          <button onClick={() => setShowRenewForm(true)}>Renew</button>
-          <button
-            onClick={() => account && cancel({ name, from: account })}
-            className="button--cancel"
-          >
+          <button onClick={handleShowForm}>Renew</button>
+          <button onClick={handleCancel} className="button--cancel">
             Cancel
           </button>
         </div>
