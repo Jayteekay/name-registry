@@ -22,7 +22,7 @@
 ### Configurations
 - Blockchain - ETH Sepolia Testnet
 - Refresh interval: 20s
-- Contract: [On etherscan](https://sepolia.etherscan.io/address/0xc42062c4789b51c0a8ffc4977f4934341a272573)
+- Contract: [On etherscan](https://sepolia.etherscan.io/address/0xf1a0a207ade7db3f4b93f67099f88eccf6660c6a)
 
 ### Improvement Suggestions
 - Inclusion of events in the smart contract to allow for better real-time event tracking

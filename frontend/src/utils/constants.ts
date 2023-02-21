@@ -1,5 +1,5 @@
 import { AbiItem } from "web3-utils";
-export const CONTRACT_ADDRESS = "0xc42062c4789b51c0a8ffc4977f4934341a272573";
+export const CONTRACT_ADDRESS = "0xf1a0a207ade7db3f4b93f67099f88eccf6660c6a";
 export const CONTRACT_ABI: AbiItem[] = [
   {
     inputs: [],
@@ -12,7 +12,7 @@ export const CONTRACT_ABI: AbiItem[] = [
     inputs: [{ internalType: "bytes32", name: "name", type: "bytes32" }],
     name: "cancel",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
